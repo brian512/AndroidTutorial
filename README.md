@@ -1,3 +1,3 @@
 # AndroidTutorial
 
- - [Android基础](./md/1. Junior/README.md)
+- [Android基础](./md/Junior/README.md)
