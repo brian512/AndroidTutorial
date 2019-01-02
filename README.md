@@ -1,10 +1,10 @@
 # AndroidTutorial
 
-- [Android基础](./md/Junior/README.md)
-     - [Android应用基础知识](./App_Fundamentals.md)
-     - [Activity](./Activity.md)
+### Android基础
+ - [Android应用基础知识](./md/Junior/App_Fundamentals.md)
+ - [Activity](./md/Junior/Activity.md)
 
-- [Android进阶](./md/Senior/README.md)
+### Android进阶
 
 
-- [Android专家](./md/Expert/README.md)
+### Android专家
