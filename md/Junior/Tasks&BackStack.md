@@ -132,8 +132,7 @@ Android 管理任务和返回栈的方式（如上所述，即：将所有连续
 - FLAG_ACTIVITY_CLEAR_TOP
 如果正在启动的 Activity 已在当前任务中运行，则会销毁当前任务顶部的所有 Activity，并通过 `onNewIntent()` 将此 Intent 传递给 Activity 已恢复的实例（现在位于顶部），而不是启动该 Activity 的新实例。
 产生这种行为的 `launchMode` 属性没有值。
-
-- FLAG_ACTIVITY_CLEAR_TOP 通常与 FLAG_ACTIVITY_NEW_TASK 结合使用。一起使用时，通过这些标志，可以找到其他任务中的现有 Activity，并将其放入可从中响应 Intent 的位置。
+FLAG_ACTIVITY_CLEAR_TOP 通常与 FLAG_ACTIVITY_NEW_TASK 结合使用。一起使用时，通过这些标志，可以找到其他任务中的现有 Activity，并将其放入可从中响应 Intent 的位置。
 
 >注：如果指定 Activity 的启动模式为 `"standard"`，则该 Activity 也会从堆栈中移除，并在其位置启动一个新实例，以便处理传入的 Intent。 这是因为当启动模式为 `"standard"` 时，将始终为新 Intent 创建新实例。
 
