@@ -193,3 +193,8 @@ FLAG_ACTIVITY_CLEAR_TOP 通常与 FLAG_ACTIVITY_NEW_TASK 结合使用。一起�
 如果您并不想用户能够返回到 Activity，对于这些情况，请将 `<activity>` 元素的 `finishOnTaskLaunch` 设置为 `"true"`（请参阅清理堆栈）。
 
 有关如何在概览屏幕中显示和管理任务与 Activity 的更多信息，请参阅概览屏幕。
+
+
+---------------
+[任务和返回栈](https://developer.android.com/guide/components/tasks-and-back-stack)
+[郭霖 - Android任务和返回栈完全解析](https://blog.csdn.net/guolin_blog/article/details/41087993)

@@ -5,9 +5,9 @@ Intent 是一个消息传递对象，您可以使用它从其他应用组件请�
 Activity 表示应用中的一个屏幕。通过将 Intent 传递给 `startActivity()`，您可以启动新的 Activity 实例。Intent 描述了要启动的 Activity，并携带了任何必要的数据。
 如果您希望在 Activity 完成后收到结果，请调用 `startActivityForResult()`。在 Activity 的 `onActivityResult()` 回调中，您的 Activity 将结果作为单独的 Intent 对象接收。如需了解详细信息，请参阅 Activity 指南。
 
-- 启动服务：
-Service 是一个不使用用户界面而在后台执行操作的组件。通过将 Intent 传递给 `startService()`，您可以启动服务执行一次性操作（例如，下载文件）。Intent 描述了要启动的服务，并携带了任何必要的数据。
-如果服务旨在使用客户端-服务器接口，则通过将 Intent 传递给 `bindService()`，您可以从其他组件绑定到此服务。如需了解详细信息，请参阅服务指南。
+- 启动Service：
+Service 是一个不使用用户界面而在后台执行操作的组件。通过将 Intent 传递给 `startService()`，您可以启动Service执行一次性操作（例如，下载文件）。Intent 描述了要启动的Service，并携带了任何必要的数据。
+如果Service务旨在使用客户端-服务器接口，则通过将 Intent 传递给 `bindService()`，您可以从其他组件绑定到此Service。
 
 - 传递广播：
 广播是任何应用均可接收的消息。系统将针对系统事件（例如：系统启动或设备开始充电时）传递各种广播。通过将 Intent 传递给 `sendBroadcast()`、`sendOrderedBroadcast()` 或 `sendStickyBroadcast()`，您可以将广播传递给其他应用。
@@ -15,10 +15,10 @@ Service 是一个不使用用户界面而在后台执行操作的组件。通过
 #### Intent 类型
 Intent 分为两种类型：
 
-- 显式 Intent：按名称（完全限定类名）指定要启动的组件。 通常，您会在自己的应用中使用显式 Intent 来启动组件，这是因为您知道要启动的 Activity 或服务的类名。例如，启动新 Activity 以响应用户操作，或者启动服务以在后台下载文件。
+- 显式 Intent：按名称（完全限定类名）指定要启动的组件。 通常，您会在自己的应用中使用显式 Intent 来启动组件，这是因为您知道要启动的 Activity 或 Service 的类名。例如，启动新 Activity 以响应用户操作，或者启动Service务以在后台下载文件。
 - 隐式 Intent ：不会指定特定的组件，而是声明要执行的常规操作，从而允许其他应用中的组件来处理它。 例如，如需在地图上向用户显示位置，则可以使用隐式 Intent，请求另一具有此功能的应用在地图上显示指定的位置。
 
-创建显式 Intent 启动 Activity 或服务时，系统将立即启动 Intent 对象中指定的应用组件。
+创建显式 Intent 启动 Activity 或 Service 时，系统将立即启动 Intent 对象中指定的应用组件。
 
 ![](../pics/intent-filters_2x.png)
 图 1. 隐式 Intent 如何通过系统传递以启动其他 Activity 的图解：
@@ -28,33 +28,33 @@ Intent 分为两种类型：
 
 Intent 过滤器是应用清单文件中的一个表达式，它指定该组件要接收的 Intent 类型。 例如，通过为 Activity 声明 Intent 过滤器，您可以使其他应用能够直接使用某一特定类型的 Intent 启动 Activity。同样，如果您没有为 Activity 声明任何 Intent 过滤器，则 Activity 只能通过显式 Intent 启动。
 
-注意：为了确保应用的安全性，启动 Service 时，请始终使用显式 Intent，且不要为服务声明 Intent 过滤器。使用隐式 Intent 启动服务存在安全隐患，因为您无法确定哪些服务将响应 Intent，且用户无法看到哪些服务已启动。从 Android 5.0（API 级别 21）开始，如果使用隐式 Intent 调用 bindService()，系统会引发异常。
+>注意：为了确保应用的安全性，启动 Service 时，请始终使用显式 Intent，且不要为Service声明 Intent 过滤器。使用隐式 Intent 启动Service存在安全隐患，因为您无法确定哪些Service将响应 Intent，且用户无法看到哪些Service已启动。从 Android 5.0（API 级别 21）开始，如果使用隐式 Intent 调用 bindService()，系统会引发异常。
 
 #### 构建 Intent
 Intent 对象携带了 Android 系统用来确定要启动哪个组件的信息（例如，准确的组件名称或应当接收该 Intent 的组件类别），以及收件人组件为了正确执行操作而使用的信息（例如，要采取的操作以及要处理的数据）。
 
 Intent 中包含的主要信息如下：
 
-##### 组件名称
+##### ComponentName
 要启动的组件名称。
 这是可选项，但也是构建显式 Intent 的一项重要信息，这意味着 Intent 应当仅传递给由组件名称定义的应用组件。 如果没有组件名称，则 Intent 是隐式的，且系统将根据其他 Intent 信息（例如，以下所述的操作、数据和类别）决定哪个组件应当接收 Intent。 因此，如需在应用中启动特定的组件，则应指定该组件的名称。
 
->注：启动 Service 时，您应始终指定组件名称。 否则，您无法确定哪项服务会响应 Intent，且用户无法看到哪项服务已启动。
+>注：启动 Service 时，您应始终指定组件名称。 否则，您无法确定哪项Service会响应 Intent，且用户无法看到哪项Service已启动。
 
 Intent 的这一字段是一个 ComponentName 对象，您可以使用目标组件的完全限定类名指定此对象，其中包括应用的软件包名称。 例如， com.example.ExampleActivity。您可以使用 setComponent()、setClass()、setClassName() 或 Intent 构造函数设置组件名称。
 
-##### 操作
-指定要执行的通用操作（例如，“查看”或“选取”）的字符串。
-对于广播 Intent，这是指已发生且正在报告的操作。操作在很大程度上决定了其余 Intent 的构成，特别是数据和 extra 中包含的内容。
+##### ACTION
+指定要执行的ACTION（例如，“查看”或“选取”）的字符串。
+对于广播 Intent，这是指已发生且正在报告的操作。ACTION在很大程度上决定了其余 Intent 的构成，特别是数据和 extra 中包含的内容。
 
-您可以指定自己的操作，供 Intent 在您的应用内使用（或者供其他应用在您的应用中调用组件）。但是，您通常应该使用由 Intent 类或其他框架类定义的操作常量。以下是一些用于启动 Activity 的常见操作：
+您可以指定自己的ACTION，供 Intent 在您的应用内使用（或者供其他应用在您的应用中调用组件）。但是，您通常应该使用由 Intent 类或其他框架类定义的ACTION常量。以下是一些用于启动 Activity 的常见ACTION：
 
  - ACTION_VIEW
 如果您拥有一些某项 Activity 可向用户显示的信息（例如，要使用图库应用查看的照片；或者要使用地图应用查看的地址），请使用 Intent 将此操作与 `startActivity()` 结合使用。
  - ACTION_SEND
 这也称为“共享”Intent。如果您拥有一些用户可通过其他应用（例如，电子邮件应用或社交共享应用）共享的数据，则应使用 Intent 将此操作与 `startActivity()` 结合使用。
 
-有关更多定义通用操作的常量，请参阅 Intent 类参考文档。 其他操作在 Android 框架中的其他位置定义。例如，对于在系统的设置应用中打开特定屏幕的操作，将在 Settings 中定义。
+有关更多定义通用操作的常量，请参阅 [Intent](https://developer.android.com/reference/android/content/Intent) 类参考文档。 其他操作在 Android 框架中的其他位置定义。例如，对于在系统的设置应用中打开特定屏幕的操作，将在 Settings 中定义。
 
 您可以使用 `setAction()` 或 Intent 构造函数为 Intent 指定操作。
 
@@ -62,21 +62,21 @@ Intent 的这一字段是一个 ComponentName 对象，您可以使用目标组�
 ```java
 static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";
 ```
-##### 数据
-引用待操作数据和/或该数据 MIME 类型的 URI（Uri 对象）。提供的数据类型通常由 Intent 的操作决定。例如，如果操作是 `ACTION_EDIT`，则数据应包含待编辑文档的 URI。
+##### DATA
+引用待操作数据和/或该数据 MIME 类型的 URI（Uri 对象）。提供的数据类型通常由 Intent 的操作决定。例如，如果ACTION是 `ACTION_EDIT`，则数据应包含待编辑文档的 URI。
 创建 Intent 时，除了指定 URI 以外，指定数据类型（其 MIME 类型）往往也很重要。例如，能够显示图像的 Activity 可能无法播放音频文件，即便 URI 格式十分类似时也是如此。因此，指定数据的 MIME 类型有助于 Android 系统找到接收 Intent 的最佳组件。但有时，MIME 类型可以从 URI 中推断得出，特别当数据是 `content: URI` 时尤其如此。这表明数据位于设备中，且由 `ContentProvider` 控制，这使得数据 MIME 类型对系统可见。
 
-要仅设置数据 URI，请调用 `setData()`。 要仅设置 MIME 类型，请调用 `setType()`。如有必要，您可以使用 setDataAndType() 同时显式设置二者。
+要仅设置数据 URI，请调用 `setData()`。 要仅设置 MIME 类型，请调用 `setType()`。如有必要，您可以使用 `setDataAndType()` 同时显式设置二者。
 
->注意：若要同时设置 URI 和 MIME 类型，请勿调用 setData() 和 setType()，因为它们会互相抵消彼此的值。请始终使用 setDataAndType() 同时设置 URI 和 MIME 类型。
+>注意：若要同时设置 URI 和 MIME 类型，请勿调用 setData() 和 setType()，因为它们会互相抵消彼此的值。请始终使用 `setDataAndType()` 同时设置 URI 和 MIME 类型。
 
-##### 类别
-一个包含应处理 Intent 组件类型的附加信息的字符串。 您可以将任意数量的类别描述放入一个 Intent 中，但大多数 Intent 均不需要类别。 以下是一些常见类别：
+##### CATEGORY
+一个包含应处理 Intent 组件类型的附加信息的字符串。 您可以将任意数量的CATEGORY描述放入一个 Intent 中，但大多数 Intent 均不需要CATEGORY。 以下是一些常见CATEGORY：
 - `CATEGORY_BROWSABLE`
 目标 Activity 允许本身通过网络浏览器启动，以显示链接引用的数据，如图像或电子邮件。
 - `CATEGORY_LAUNCHER`
 该 Activity 是任务的初始 Activity，在系统的应用启动器中列出。
-有关类别的完整列表，请参阅 Intent 类描述。
+有关CATEGORY的完整列表，请参阅 [Intent](https://developer.android.com/reference/android/content/Intent) 类描述。
 
 您可以使用 `addCategory()` 指定类别。
 
@@ -86,22 +86,22 @@ static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";
 
 ##### Extra
 携带完成请求操作所需的附加信息的键值对。正如某些操作使用特定类型的数据 URI 一样，有些操作也使用特定的 extra。
-您可以使用各种 putExtra() 方法添加 extra 数据，每种方法均接受两个参数：键名和值。您还可以创建一个包含所有 extra 数据的 Bundle 对象，然后使用 putExtras() 将Bundle 插入 Intent 中。
+您可以使用各种 `putExtra()` 方法添加 extra 数据，每种方法均接受两个参数：键名和值。您还可以创建一个包含所有 extra 数据的 Bundle 对象，然后使用 `putExtras()` 将Bundle 插入 Intent 中。
 
-例如，使用 ACTION_SEND 创建用于发送电子邮件的 Intent 时，可以使用 EXTRA_EMAIL 键指定“目标”收件人，并使用 EXTRA_SUBJECT 键指定“主题”。
+例如，使用 `ACTION_SEND` 创建用于发送电子邮件的 Intent 时，可以使用 `EXTRA_EMAIL` 键指定“目标”收件人，并使用 `EXTRA_SUBJECT` 键指定“主题”。
 
 Intent 类将为标准化的数据类型指定多个 EXTRA_* 常量。如需声明自己的 extra 键（对于应用接收的 Intent），请确保将应用的软件包名称作为前缀。 例如：
 ```java
 static final String EXTRA_GIGAWATTS = "com.example.EXTRA_GIGAWATTS";
 ```
-##### 标志
+##### Flags
 在 Intent 类中定义的、充当 Intent 元数据的标志。 标志可以指示 Android 系统如何启动 Activity（例如，Activity 应属于哪个任务），以及启动之后如何处理（例如，它是否属于最近的 Activity 列表）。
 如需了解详细信息，请参阅 `setFlags()` 方法。
 
 #### 显式 Intent 示例
-显式 Intent 是指用于启动某个特定应用组件（例如，应用中的某个特定 Activity 或服务）的 Intent。 要创建显式 Intent，请为 Intent 对象定义组件名称 — Intent 的所有其他属性均为可选属性。
+显式 Intent 是指用于启动某个特定应用组件（例如，应用中的某个特定 Activity 或 Service）的 Intent。 要创建显式 Intent，请为 Intent 对象定义组件名称 — Intent 的所有其他属性均为可选属性。
 
-例如，如果在应用中构建了一个名为 DownloadService、旨在从网页下载文件的服务，则可使用以下代码启动该服务：
+例如，如果在应用中构建了一个名为 DownloadService、旨在从网页下载文件的Service务，则可使用以下代码启动该Service：
 ```java
 // Executed in an Activity, so 'this' is the Context
 // The fileUrl is a string URL, such as "http://www.example.com/image.png"
@@ -111,7 +111,6 @@ startService(downloadIntent);
 ```
 Intent(Context, Class) 构造函数分别为应用和组件提供 Context 和 Class 对象。因此，此 Intent 将显式启动该应用中的 DownloadService 类。
 
-如需了解有关构建和启动服务的详细信息，请参阅服务指南。
 
 #### 隐式 Intent 示例
 隐式 Intent 指定能够在可以执行相应操作的设备上调用任何应用的操作。 如果您的应用无法执行该操作而其他应用可以，且您希望用户选取要使用的应用，则使用隐式 Intent 非常有用。
@@ -198,7 +197,7 @@ if (sendIntent.resolveActivity(getPackageManager()) != null) {
 
 系统通过将 Intent 与所有这三个元素进行比较，根据过滤器测试隐式 Intent。 隐式 Intent 若要传递给组件，必须通过所有这三项测试。如果 Intent 甚至无法匹配其中任何一项测试，则 Android 系统不会将其传递给组件。 但是，由于一个组件可能有多个 Intent 过滤器，因此未能通过某一组件过滤器的 Intent 可能会通过另一过滤器。如需了解有关系统如何解析 Intent 的详细信息，请参阅下文的 Intent 解析部分。
 
->注意：为了避免无意中运行不同应用的 Service，请始终使用显式 Intent 启动您自己的服务，且不必为该服务声明 Intent 过滤器。
+>注意：为了避免无意中运行不同应用的 Service，请始终使用显式 Intent 启动您自己的Service，且不必为该Service声明 Intent 过滤器。
 
 >注：对于所有 Activity，您必须在清单文件中声明 Intent 过滤器。但是，广播接收器的过滤器可以通过调用 `registerReceiver()` 动态注册。 稍后，您可以使用 `unregisterReceiver()` 注销该接收器。这样一来，应用便可仅在应用运行时的某一指定时间段内侦听特定的广播。
 
@@ -358,3 +357,8 @@ content://com.example.project:200/folder/subfolder/etc
 通过 Intent 过滤器匹配 Intent，这不仅有助于发现要激活的目标组件，还有助于发现设备上组件集的相关信息。 例如，主页应用通过使用指定 `ACTION_MAIN` 操作和 `CATEGORY_LAUNCHER` 类别的 Intent 过滤器查找所有 Activity，以此填充应用启动器。
 
 您的应用可以采用类似的方式使用 Intent 匹配。`PackageManager` 提供了一整套 `query...()` 方法来返回所有能够接受特定 Intent 的组件。此外，它还提供了一系列类似的 `resolve...()` 方法来确定响应 Intent 的最佳组件。 例如，`queryIntentActivities()` 将返回能够执行那些作为参数传递的 Intent 的所有 Activity 列表，而 `queryIntentServices()` 则可返回类似的服务列表。这两种方法均不会激活组件，而只是列出能够响应的组件。 对于广播接收器，有一种类似的方法： `queryBroadcastReceivers()`。
+
+------------------
+[
+Intent 和 Intent 过滤器](https://developer.android.com/guide/components/intents-filters)
+[通用 Intent](https://developer.android.com/guide/components/intents-common)

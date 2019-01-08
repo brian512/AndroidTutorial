@@ -10,6 +10,8 @@
  - [在运行时请求权限](./md/Junior/PermissionRequest.md)
  - [系统权限](./md/Junior/PermissionType.md)
 
+ - [IntentService解析](./md/Junior/IntentService.md)
+
 ### Android进阶
 
 
