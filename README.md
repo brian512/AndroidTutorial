@@ -10,7 +10,12 @@
  - [在运行时请求权限](./md/Junior/PermissionRequest.md)
  - [系统权限](./md/Junior/PermissionType.md)
 
+ - [布局](./md/Junior/DeclaringLayout.md)
+ - [LinearLayout](./md/Junior/LinearLayout.md)
+ - [RelativeLayout](./md/Junior/RelativeLayout.md)
+
  - [IntentService解析](./md/Junior/IntentService.md)
+ - [系统通知](./md/Junior/Notifications.md)
 
 ### Android进阶
 
