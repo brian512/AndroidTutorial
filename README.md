@@ -5,6 +5,7 @@
  - [Activity](./md/Junior/Activity.md)
  - [ActivityTask和返回栈](./md/Junior/Tasks&BackStack.md)
  - [Intent 和 Intent 过滤器](./md/Junior/IntentsFilters.md)
+ - [允许其他应用启动您的 Activity](./md/Junior/StartActivityWithIntent.md)
  - [Android资源](./md/Junior/Resources.md)
  - [处理运行时变更](./md/Junior/RuntimeConfigChanges.md)
  - [在运行时请求权限](./md/Junior/PermissionRequest.md)
