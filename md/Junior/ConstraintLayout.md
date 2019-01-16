@@ -8,12 +8,12 @@
 目前你可以使用下面这些类型的限制:
 - <a href="#RelativePositioning">相对定位</a>
 - <a href="#Margins">Margins</a>
-- <a href="#CenteringPositioning">中心定位</a></a>
-- <a href="#CircularPositioning">圆形定位</a></a>
-- <a href="#VisibilityBehavior">可见性行为</a></a>
-- <a href="#DimensionConstraints">尺寸约束</a></a>
-- <a href="#Chains">链</a></a>
-- <a href="#VirtualHelpersObjects">虚拟助手对象</a></a>
+- <a href="#CenteringPositioning">中心定位</a>
+- <a href="#CircularPositioning">圆形定位</a>
+- <a href="#VisibilityBehavior">可见性行为</a>
+- <a href="#DimensionConstraints">尺寸约束</a>
+- <a href="#Chains">链</a>
+- <a href="#VirtualHelpersObjects">虚拟助手对象</a>
 - <a href="#Optimizer">优化器</a>
 
 >注意：在约束条件下不能有循环依赖关系。
