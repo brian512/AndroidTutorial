@@ -1,7 +1,7 @@
 ## ConstraintLayout
 
 
-`ConstraintLayout`是一个让控件摆放排列更灵活的布局。
+<a href="https://developer.android.com/reference/android/support/constraint/ConstraintLayout">`ConstraintLayout`</a>是一个让控件摆放排列更灵活的布局。
 
 >注意: `ConstraintLayout`可以作为支持库，您可以使用Android系统从API级别9(Gingerbread)。因此，我们计划在丰富其API和功能。这个文档将反映这些变化。
 
@@ -280,6 +280,7 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 
 ------------------
 [ConstraintLayout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout)
+
 [Android新特性介绍，ConstraintLayout完全解析](https://blog.csdn.net/guolin_blog/article/details/53122387)
 
 
