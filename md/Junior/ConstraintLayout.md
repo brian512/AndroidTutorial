@@ -134,7 +134,7 @@
 			app:layout_constraintCircleAngle="45" />
 ```
 
-### <a href="VisibilityBehavior">可见性行为</a>
+### <a name="VisibilityBehavior">可见性行为</a>
 当控件被设置为`View.GONE`时，`ConstraintLayout`都有一个特定的处理。
 
 跟通常情况一样，GONE控件不会被显示，并且不是布局本身的一部分（即标记为GONE后实际尺寸不会改变）。
@@ -150,7 +150,7 @@
 >注意：所使用的margin将是B在连接到A时定义的margin(请参见图7)。在某些情况下，这可能不是你想要的margin(如A距离父容器有100dp的margin，B距离A只有16dp的margin，把A标记为GONE后，B将距离父容器16dp)。出于这个原因，当一个被依赖的控件被标记为GONE时，您可以指定一个替代margin值(请参阅前面一节关于GONE Margin属性)。
 
 
-### <a href="DimensionConstraints">尺寸约束</a>
+### <a name="DimensionConstraints">尺寸约束</a>
 `ConstraintLayout`的最小尺寸
 你可以为 `ConstraintLayout` 指定最大和最小尺寸:
  - `android:minWidth` 设置布局最小宽度
@@ -221,7 +221,7 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 将按钮的高度设置后一个16:9的高度，而按钮的宽度将匹配父容器的约束。
 
 
-### <a href="#Chains">链</a>
+### <a name="#Chains">链</a>
 `Chains` 提供类似组(group-like)的行为在一个轴(axis)(横向或纵向)。其他轴可以独立约束。
 
 ##### 创建一个链
@@ -262,11 +262,11 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 在计算剩余空间时，元素的尺寸和margin被打包在一起计算的。剩下的空间不包含元素间的间距。
 
 
-### <a href="VirtualHelpersObjects">虚拟助手对象</a>
+### <a name="VirtualHelpersObjects">虚拟助手对象</a>
 除了刚才详细描述的原有功能，你还可以在`ConstraintLayout`中使用特殊的helper对象来帮助你布局。目前，`Guideline`对象允许您创建水平和垂直参考线来摆放在于`ConstraintLayout`容器的相对位置。控件在布局定位时可以使用guidelines来约束。在1.1中，`Barrier`和`Group`被添加。
 
 
-### <a href="Optimizer">优化器</a> (in 1.1)
+### <a name="Optimizer">优化器</a> (in 1.1)
 在1.1中我们接触约束优化器。你可以通过添加标签`layout_optimizationLevel`，来指定优化哪些`ConstraintLayout`元素:
  - `none` : 不使用优化器
  - `standard` : 默认. 只优化direct 和 barrier
