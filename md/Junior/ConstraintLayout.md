@@ -20,7 +20,7 @@
 
 参见[ConstraintLayout.LayoutParams](https://developer.android.com/reference/android/support/constraint/ConstraintLayout.LayoutParams.html)的布局属性
 
-### <a name="#RelativePositioning">相对定位</a>
+### <a name="RelativePositioning">相对定位</a>
 相对定位是在`ConstraintLayout`创建布局的基本构建块。这些约束允许您将给定的控件与另一个相对应。你可以在水平轴和垂直轴上约束控件:
 - 水平轴: left，right，start 和 end
 - 垂直轴: top，bottom 和 baseline
@@ -61,7 +61,7 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 ```
 
-### <a name="#Margins">Margins</a>
+### <a name="Margins">Margins</a>
 ![图3 - 相对布局Margins](../pics/relative-positioning-margin.png)
 图3 - 相对布局Margins
 
@@ -84,7 +84,7 @@
 - `layout_goneMarginRight`
 - `layout_goneMarginBottom`
 
-###### <a name="#CenteringPositioning">中心定位和偏移</a>
+###### <a name="CenteringPositioning">中心定位和偏移</a>
 `ConstraintLayout`有一个很有用的特性是如何处理“不可能”的约束。例如:
 ```xml
 <android.support.constraint.ConstraintLayout ...>
@@ -118,7 +118,7 @@
 使用偏差，您可以创建用户界面，将更好的适应屏幕大小变化。
 
 
-### <a href="#CircularPositioning">圆形布局</a> (Added in 1.1)
+### <a href="CircularPositioning">圆形布局</a> (Added in 1.1)
 你可以限制一个控件中心相对于另一个控件中心，在一个角度和距离。这允许您将控件摆放在一个圆上(见图6)，可以使用以下属性:
 - `layout_constraintCircle` : 引用另一个控件的id
 - `layout_constraintCircleRadius` : 到圆心的距离
@@ -136,7 +136,7 @@ Fig. 6 - 圆形布局
       app:layout_constraintCircleAngle="45" />
 ```
 
-### <a href="#VisibilityBehavior">可见性行为</a>
+### <a href="VisibilityBehavior">可见性行为</a>
 当控件被设置为`View.GONE`时，`ConstraintLayout`都有一个特定的处理。
 
 跟通常情况一样，GONE控件不会被显示，并且不是布局本身的一部分（即标记为GONE后实际尺寸不会改变）。
@@ -152,7 +152,7 @@ Fig. 6 - 圆形布局
 >注意：所使用的margin将是B在连接到A时定义的margin(请参见图7)。在某些情况下，这可能不是你想要的margin(如A距离父容器有100dp的margin，B距离A只有16dp的margin，把A标记为GONE后，B将距离父容器16dp)。出于这个原因，当一个被依赖的控件被标记为GONE时，您可以指定一个替代margin值(请参阅前面一节关于GONE Margin属性)。
 
 
-### <a href="#DimensionConstraints">尺寸约束</a>
+### <a href="DimensionConstraints">尺寸约束</a>
 `ConstraintLayout`的最小尺寸
 你可以为 `ConstraintLayout` 指定最大和最小尺寸:
  - `android:minWidth` 设置布局最小宽度
@@ -264,11 +264,11 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 在计算剩余空间时，元素的尺寸和margin被打包在一起计算的。剩下的空间不包含元素间的间距。
 
 
-### <a href="#VirtualHelpersObjects">虚拟助手对象</a>
+### <a href="VirtualHelpersObjects">虚拟助手对象</a>
 除了刚才详细描述的原有功能，你还可以在`ConstraintLayout`中使用特殊的helper对象来帮助你布局。目前，`Guideline`对象允许您创建水平和垂直参考线来摆放在于`ConstraintLayout`容器的相对位置。控件在布局定位时可以使用guidelines来约束。在1.1中，`Barrier`和`Group`被添加。
 
 
-### <a href="#Optimizer">优化器</a> (in 1.1)
+### <a href="Optimizer">优化器</a> (in 1.1)
 在1.1中我们接触约束优化器。你可以通过添加标签`layout_optimizationLevel`，来指定优化哪些`ConstraintLayout`元素:
  - `none` : 不使用优化器
  - `standard` : 默认. 只优化direct 和 barrier
