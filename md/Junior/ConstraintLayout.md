@@ -91,7 +91,6 @@
   	<Button android:id="@+id/button" ...
           	app:layout_constraintLeft_toLeftOf="parent"
           	app:layout_constraintRight_toRightOf="parent" />
-</>
 ```
 
 除非`ConstraintLayout`恰好有相同大小的按钮，两个约束不能同时满足(双方都不能在我们期望的位置)。
@@ -113,7 +112,6 @@
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
-</>
 ```
 使用偏差，您可以创建用户界面，将更好的适应屏幕大小变化。
 
