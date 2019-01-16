@@ -116,7 +116,7 @@
 使用偏差，您可以创建用户界面，将更好的适应屏幕大小变化。
 
 
-### <a href="CircularPositioning">圆形布局</a> (Added in 1.1)
+### <a name="CircularPositioning">圆形布局</a> (Added in 1.1)
 你可以限制一个控件中心相对于另一个控件中心，在一个角度和距离。这允许您将控件摆放在一个圆上(见图6)，可以使用以下属性:
 - `layout_constraintCircle` : 引用另一个控件的id
 - `layout_constraintCircleRadius` : 到圆心的距离
@@ -213,7 +213,7 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 ```xml
 <Button android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H，16:9"
+        app:layout_constraintDimensionRatio="H,16:9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 ```
