@@ -84,13 +84,13 @@
 - `layout_goneMarginRight`
 - `layout_goneMarginBottom`
 
-###### <a name="CenteringPositioning">中心定位和偏移</a>
+### <a name="CenteringPositioning">中心定位和偏移</a>
 `ConstraintLayout`有一个很有用的特性是如何处理“不可能”的约束。例如:
 ```xml
 <android.support.constraint.ConstraintLayout ...>
-  <Button android:id="@+id/button" ...
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+  	<Button android:id="@+id/button" ...
+          	app:layout_constraintLeft_toLeftOf="parent"
+          	app:layout_constraintRight_toRightOf="parent" />
 </>
 ```
 
@@ -109,7 +109,7 @@
 下面的例子展示了左边偏移30%(默认是偏移50%居中)，这样左边会更窄，控件更倾向于左边(图5):
 ```xml
 <android.support.constraint.ConstraintLayout ...>
-  <Button android:id="@+id/button" ...
+	<Button android:id="@+id/button" ...
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
@@ -130,10 +130,10 @@ Fig. 6 - 圆形布局
 
 ```xml
 <Button android:id="@+id/buttonA" ... />
-  <Button android:id="@+id/buttonB" ...
-      app:layout_constraintCircle="@+id/buttonA"
-      app:layout_constraintCircleRadius="100dp"
-      app:layout_constraintCircleAngle="45" />
+	<Button android:id="@+id/buttonB" ...
+			app:layout_constraintCircle="@+id/buttonA"
+			app:layout_constraintCircleRadius="100dp"
+			app:layout_constraintCircleAngle="45" />
 ```
 
 ### <a href="VisibilityBehavior">可见性行为</a>
