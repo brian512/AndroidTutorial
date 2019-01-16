@@ -28,8 +28,8 @@
 一般的概念是将一个控件的一个侧面约束到另一个控件的另一侧。
 
 例如，为了将按钮B放在按钮A的右边(图1):
-![](../pics/relative-positioning.png)
-图1 - 相对布局例子
+<br>![](../pics/relative-positioning.png)
+<br>图1 - 相对布局例子
 你只需要做:
 ```xml
 <Button android:id="@+id/buttonA" ... />
@@ -37,8 +37,8 @@
         app:layout_constraintLeft_toRightOf="@+id/buttonA" />
 ```
 这是告诉系统我们想要按钮B的左边被约束在按钮A的右侧。这样一个位置约束意味着系统将尝试双方共享相同的位置。
-![](../pics/relative-positioning-constraints.png)
-图2 - Relative Positioning Constraints
+<br>![](../pics/relative-positioning-constraints.png)
+<br>图2 - Relative Positioning Constraints
 
 下面是一些可用的约束属性(图2):
 - `layout_constraintLeft_toLeftOf`
@@ -62,8 +62,8 @@
 ```
 
 ### <a name="Margins">Margins</a>
-![图3 - 相对布局Margins](../pics/relative-positioning-margin.png)
-图3 - 相对布局Margins
+<br>![图3 - 相对布局Margins](../pics/relative-positioning-margin.png)
+<br>图3 - 相对布局Margins
 
 如果设置了margin，他们将被应用到相应的约束(如果存在的话)(图3)，保证margin作为目标和源控件之间的空间。通常可用于这种效果的布局margin属性:
 - `android:layout_marginStart`
@@ -95,16 +95,16 @@
 ```
 
 除非`ConstraintLayout`恰好有相同大小的按钮，两个约束不能同时满足(双方都不能在我们期望的位置)。
-![图4 - 中心定位](../pics/centering-positioning.png)
-图4 - 中心定位
+<br>![图4 - 中心定位](../pics/centering-positioning.png)
+<br>图4 - 中心定位
 在这种情况下会发生的是，约束像相反且相等的力量将控件分开(图4)；这样部件最终将被放置在父容器的中间。这将同样适用于垂直约束。
 
 ##### 偏移
 默认情况下，遇到这样的相反的约束是将控件居中；但是你可以调整定位倾向一方使用偏差属性:
 - `layout_constraintHorizontal_bias`
 - `layout_constraintVertical_bias`
-![图5 - 中心定位与偏移](../pics/centering-positioning-bias.png)
-图5 - 中心定位与偏移
+<br>![图5 - 中心定位与偏移](../pics/centering-positioning-bias.png)
+<br>图5 - 中心定位与偏移
 
 下面的例子展示了左边偏移30%(默认是偏移50%居中)，这样左边会更窄，控件更倾向于左边(图5):
 ```xml
@@ -124,9 +124,9 @@
 - `layout_constraintCircleRadius` : 到圆心的距离
 - `layout_constraintCircleAngle` : 控件摆放的角度(角度：从 0 到 360)
 
-![](../pics/circle1.png)
-![](../pics/circle2.png)
-Fig. 6 - 圆形布局
+<br>![](../pics/circle1.png)
+<br>![](../pics/circle2.png)
+<br>Fig. 6 - 圆形布局
 
 ```xml
 <Button android:id="@+id/buttonA" ... />
@@ -144,8 +144,8 @@ Fig. 6 - 圆形布局
 但在计算布局方面，GONE控件仍然是它的一部分，一个重要的区别:
 - 在layout之后，这些控件的尺寸被视是0 (基本上，控件将会当作一个点处理)
 - 如果他们有其他控件有约束，这些控件仍然会生效，但任何margin将等于零
-![图7 - 可见性行为](../pics/visibility-behavior.png)
-图7 - 可见性行为
+<br>![图7 - 可见性行为](../pics/visibility-behavior.png)
+<br>图7 - 可见性行为
 
 这个特定行为允许你在构建布局，可以暂时隐藏控件而不破坏其他布局(图7)，在做简单布局动画时特别有用。
 
@@ -168,8 +168,8 @@ Fig. 6 - 圆形布局
  - 使用固定尺寸 (一个数值如 123dp 或者 尺寸引用)
  - 使用 `WRAP_CONTENT`， 让每个控件计算自己的尺寸
  - 使用 0dp，等同于 `MATCH_CONSTRAINT`
-![图8 - 尺寸约束](../pics/dimension-match-constraints.png)
-图8 - 尺寸约束
+<br>![图8 - 尺寸约束](../pics/dimension-match-constraints.png)
+<br>图8 - 尺寸约束
 
 前两个选项与其他布局一样使用。最后一个则是让控件适应布局的约束尺寸 (见图8， (a) 是 wrap_content，(b) 是 0dp)。如果设置了margin，则也会计算在内 (Fig. 8， (c) 是 0dp).
 
@@ -229,13 +229,13 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
 ##### 创建一个链
 一组控件通过双向链连接在一起，则他们被认为是一个链(参见图9，显示两个控件组成的最小链，)。
 
-![](../pics/chains.png)
-图9 - Chain
+<br>![](../pics/chains.png)
+<br>图9 - Chain
 
 ##### 链首（Chain Head）
 链是由链集合的第一个元素(链首)的属性控制:
-![](../pics/chains-head.png)
-图 10 - Chain Head
+<br>![](../pics/chains-head.png)
+<br>图 10 - Chain Head
 左边第一个的控件是水平链的链首，最顶部的控件是垂直链的链首。
 
 ##### Margins in chains
@@ -249,8 +249,8 @@ WRAP_CONTENT : 强制约束 (版本1.1添加)
  - `CHAIN_SPREAD_INSIDE` -- 类似，但链式的端点不会散开
  - `CHAIN_PACKED` -- 链的元素将被打包在一起。孩子的水平或垂直偏差属性将影响包装元素的位置
 
-![](../pics/chains-styles.png)
-图11 - Chains Styles
+<br>![](../pics/chains-styles.png)
+<br>图11 - Chains Styles
 
 
 ##### 权重链
