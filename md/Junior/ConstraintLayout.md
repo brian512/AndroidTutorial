@@ -3,32 +3,31 @@
 
 `ConstraintLayout`是一个让控件摆放排列更灵活的布局。
 
->Note: `ConstraintLayout`可以作为支持库,您可以使用Android系统从API级别9(Gingerbread)。因此,我们计划在丰富其API和功能。这个文档将反映这些变化。
+>注意: `ConstraintLayout`可以作为支持库，您可以使用Android系统从API级别9(Gingerbread)。因此，我们计划在丰富其API和功能。这个文档将反映这些变化。
 
 目前你可以使用下面这些类型的限制:
-- Relative positioning
-- Margins
-- Centering positioning
-- Circular positioning
-- Visibility behavior
-- Dimension constraints
-- Chains
-- Virtual Helpers objects
-- Optimizer
+- <a href="#Relative_positioning">相对定位</a>
+- <a href="#Margins">Margins</a>
+- <a href="#Centering_positioning">中心定位</a></a>
+- <a href="#Circular_positioning">圆形定位</a></a>
+- <a href="#Visibility_behavior">可见性行为</a></a>
+- <a href="#Dimension_constraints">尺寸约束</a></a>
+- <a href="#Chains">链</a></a>
+- <a href="#Virtual_Helpers_objects">虚拟助手对象</a></a>
+- <a href="#Optimizer">优化器</a>
 
-注意，不能有循环依赖约束。
+>注意：在约束条件下不能有循环依赖关系。
 
-Also see ConstraintLayout.LayoutParams for layout attributes
+参见[ConstraintLayout.LayoutParams](https://developer.android.com/reference/android/support/constraint/ConstraintLayout.LayoutParams.html)的布局属性
 
-### 相对布局
-相对布局是在`ConstraintLayout`创建布局的基本构建块。这些约束可以给定部件相对于另一个位置。你可以限制一个小部件在水平和垂直轴:
-
+### <a name="#Relative_positioning">相对定位</a>
+相对定位是在`ConstraintLayout`创建布局的基本构建块。这些约束允许您将给定的控件与另一个相对应。你可以在水平轴和垂直轴上约束控件:
 - 水平轴: left，right，start 和 end
-- 垂直轴: top, bottom 和 baseline
+- 垂直轴: top，bottom 和 baseline
 
-一般概念是限制给定的小部件的另一面其他小部件。
+一般的概念是将一个控件的一个侧面约束到另一个控件的另一侧。
 
-例如,为了将按钮B放在按钮A的右边(图1):
+例如，为了将按钮B放在按钮A的右边(图1):
 ![](../pics/relative-positioning.png)
 图1 - 相对布局例子
 你只需要做:
@@ -37,90 +36,93 @@ Also see ConstraintLayout.LayoutParams for layout attributes
 <Button android:id="@+id/buttonB" ...
         app:layout_constraintLeft_toRightOf="@+id/buttonA" />
 ```
-
 这是告诉系统我们想要按钮B的左边被约束在按钮A的右侧。这样一个位置约束意味着系统将尝试双方共享相同的位置。
 ![](../pics/relative-positioning-constraints.png)
 图2 - Relative Positioning Constraints
-下面是一些可用的约束属性(图2):
-- layout_constraintLeft_toLeftOf
-- layout_constraintLeft_toRightOf
-- layout_constraintRight_toLeftOf
-- layout_constraintRight_toRightOf
-- layout_constraintTop_toTopOf
-- layout_constraintTop_toBottomOf
-- layout_constraintBottom_toTopOf
-- layout_constraintBottom_toBottomOf
-- layout_constraintBaseline_toBaselineOf
-- layout_constraintStart_toEndOf
-- layout_constraintStart_toStartOf
-- layout_constraintEnd_toStartOf
-- layout_constraintEnd_toEndOf
 
-他们都通过id引用到另一个控件,或`parent`(引用父容器,即`ConstraintLayout`):
+下面是一些可用的约束属性(图2):
+- `layout_constraintLeft_toLeftOf`
+- `layout_constraintLeft_toRightOf`
+- `layout_constraintRight_toLeftOf`
+- `layout_constraintRight_toRightOf`
+- `layout_constraintTop_toTopOf`
+- `layout_constraintTop_toBottomOf`
+- `layout_constraintBottom_toTopOf`
+- `layout_constraintBottom_toBottomOf`
+- `layout_constraintBaseline_toBaselineOf`
+- `layout_constraintStart_toEndOf`
+- `layout_constraintStart_toStartOf`
+- `layout_constraintEnd_toStartOf`
+- `layout_constraintEnd_toEndOf`
+
+他们都通过id引用到另一个控件，或`parent`(引用父容器，即`ConstraintLayout`):
 ```xml
 <Button android:id="@+id/buttonB" ...
         app:layout_constraintLeft_toLeftOf="parent" />
 ```
 
-#### Margins
-![](../pics/relative-positioning-margin.png)
+### <a name="#Margins">Margins</a>
+![图3 - 相对布局Margins](../pics/relative-positioning-margin.png)
 图3 - 相对布局Margins
-如果设置了margin，他们将被应用到相应的约束(如果存在的话)(图3),保证margin作为目标和源控件之间的空间。通常可用于这种效果的布局margin属性:
-- android:layout_marginStart
-- android:layout_marginEnd
-- android:layout_marginLeft
-- android:layout_marginTop
-- android:layout_marginRight
-- android:layout_marginBottom
+
+如果设置了margin，他们将被应用到相应的约束(如果存在的话)(图3)，保证margin作为目标和源控件之间的空间。通常可用于这种效果的布局margin属性:
+- `android:layout_marginStart`
+- `android:layout_marginEnd`
+- `android:layout_marginLeft`
+- `android:layout_marginTop`
+- `android:layout_marginRight`
+- `android:layout_marginBottom`
 
 >注意： margin只能是大于或等于0的数.
 
 ##### 使用margin连接到一个GONE的控件
 当约束的目标控件的可见属性是GONE，就需要使用另外一批属性：
-- layout_goneMarginStart
-- layout_goneMarginEnd
-- layout_goneMarginLeft
-- layout_goneMarginTop
-- layout_goneMarginRight
-- layout_goneMarginBottom
+- `layout_goneMarginStart`
+- `layout_goneMarginEnd`
+- `layout_goneMarginLeft`
+- `layout_goneMarginTop`
+- `layout_goneMarginRight`
+- `layout_goneMarginBottom`
 
-###### 居中和偏移
+###### <a name="#Centering_positioning">中心定位和偏移</a>
 `ConstraintLayout`有一个很有用的特性是如何处理“不可能”的约束。例如:
 ```xml
 <android.support.constraint.ConstraintLayout ...>
-	<Button android:id="@+id/button" ...
+  <Button android:id="@+id/button" ...
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent/>
+            app:layout_constraintRight_toRightOf="parent" />
 </>
 ```
 
-除非ConstraintLayout恰巧有相同大小的按钮,两个约束不能同时满足(双方都不能在我们期望的位置)。
-![](../pics/centering-positioning.png)
-图4 - 居中
-在这种情况下会发生什么是约束像相反且相等的力量将小部件分开(图4);这样部件最终将被放置在父容器的中间。这将同样适用垂直约束。
+除非`ConstraintLayout`恰好有相同大小的按钮，两个约束不能同时满足(双方都不能在我们期望的位置)。
+![图4 - 中心定位](../pics/centering-positioning.png)
+图4 - 中心定位
+在这种情况下会发生的是，约束像相反且相等的力量将控件分开(图4)；这样部件最终将被放置在父容器的中间。这将同样适用于垂直约束。
 
 ##### 偏移
-默认时遇到这样的相反的约束是将控件居中;但是你可以调整定位倾向一方使用偏差属性:
-- layout_constraintHorizontal_bias
-- layout_constraintVertical_bias
-![](../pics/centering-positioning-bias.png)
-图5 - 居中带偏移
-下面的例子展示了左边偏移30%(默认是偏移50%居中), 这样左边会更窄,控件更倾向于左边(图5):
+默认情况下，遇到这样的相反的约束是将控件居中；但是你可以调整定位倾向一方使用偏差属性:
+- `layout_constraintHorizontal_bias`
+- `layout_constraintVertical_bias`
+![图5 - 中心定位与偏移](../pics/centering-positioning-bias.png)
+图5 - 中心定位与偏移
+
+下面的例子展示了左边偏移30%(默认是偏移50%居中)，这样左边会更窄，控件更倾向于左边(图5):
 ```xml
 <android.support.constraint.ConstraintLayout ...>
-	<Button android:id="@+id/button" ...
+  <Button android:id="@+id/button" ...
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent/>
+            app:layout_constraintRight_toRightOf="parent"/>
 </>
 ```
-使用偏差,您可以创建用户界面,将更好的适应屏幕大小变化。
+使用偏差，您可以创建用户界面，将更好的适应屏幕大小变化。
 
-#### 环形布局 (Added in 1.1)
-你可以限制一个小部件中心相对于另一个小部件中心,在一个角度和距离。这允许您将控件摆放在一个圆上(见图6),可以使用以下属性:
-- layout_constraintCircle : 引用另一个控件的id
-- layout_constraintCircleRadius : 到圆心的距离
-- layout_constraintCircleAngle : 控件摆放的角度(角度：从 0 到 360)
+
+### <a href="#Circular_positioning">圆形布局</a> (Added in 1.1)
+你可以限制一个控件中心相对于另一个控件中心，在一个角度和距离。这允许您将控件摆放在一个圆上(见图6)，可以使用以下属性:
+- `layout_constraintCircle` : 引用另一个控件的id
+- `layout_constraintCircleRadius` : 到圆心的距离
+- `layout_constraintCircleAngle` : 控件摆放的角度(角度：从 0 到 360)
 
 ![](../pics/circle1.png)
 ![](../pics/circle2.png)
@@ -134,142 +136,152 @@ Fig. 6 - 圆形布局
       app:layout_constraintCircleAngle="45" />
 ```
 
-#### 可行性行为
+### <a href="#Visibility_behavior">可见性行为</a>
 当控件被设置为`View.GONE`时，`ConstraintLayout`都有一个特定的处理。
 
 跟通常情况一样，GONE控件不会被显示，并且不是布局本身的一部分（即标记为GONE后实际尺寸不会改变）。
 
-但在计算布局方面,GONE控件仍然是它的一部分,一个重要的区别:
-- 对于布局来说，这些控件的尺寸被认为是0 (基本上, 控件将会当作一个点处理)
-- 如果他们有约束其他控件，这些控件仍然会生效，但任何margin将等于零
-![](../pics/visibility-behavior.png)
+但在计算布局方面，GONE控件仍然是它的一部分，一个重要的区别:
+- 在layout之后，这些控件的尺寸被视是0 (基本上，控件将会当作一个点处理)
+- 如果他们有其他控件有约束，这些控件仍然会生效，但任何margin将等于零
+![图7 - 可见性行为](../pics/visibility-behavior.png)
 图7 - 可见性行为
 
-这个特定行为允许你在构建布局,可以暂时隐藏控件而不在不破坏其他布局(图7),在做简单布局动画时特别有用。
+这个特定行为允许你在构建布局，可以暂时隐藏控件而不破坏其他布局(图7)，在做简单布局动画时特别有用。
 
->注意:使用的保证金将定义的保证金,B当连接到一个示例(请参见图7)。在某些情况下,这可能不是你想要的保证金(如有100 dp的优势,它的容器,B只有16 dp,标志着了,B将保证金16 dp的容器)。出于这个原因,您可以指定一个替代margin值时使用的是一个小部件的连接被标记为消失了(请参阅前面一节关于GONE Margin属性)。
-
-#### 大小约束
-Minimum dimensions on ConstraintLayout
-You can define minimum and maximum sizes for the ConstraintLayout itself:
- - android:minWidth set the minimum width for the layout
- - android:minHeight set the minimum height for the layout
- - android:maxWidth set the maximum width for the layout
- - android:maxHeight set the maximum height for the layout
-
-Those minimum and maximum dimensions will be used by ConstraintLayout when its dimensions are set to WRAP_CONTENT.
+>注意：所使用的margin将是B在连接到A时定义的margin(请参见图7)。在某些情况下，这可能不是你想要的margin(如A距离父容器有100dp的margin，B距离A只有16dp的margin，把A标记为GONE后，B将距离父容器16dp)。出于这个原因，当一个被依赖的控件被标记为GONE时，您可以指定一个替代margin值(请参阅前面一节关于GONE Margin属性)。
 
 
-##### Widgets dimension constraints
-The dimension of the widgets can be specified by setting the android:layout_width and android:layout_height attributes in 3 different ways:
- - Using a specific dimension (either a literal value such as 123dp or a Dimension reference)
- - Using WRAP_CONTENT, which will ask the widget to compute its own size
- - Using 0dp, which is the equivalent of "MATCH_CONSTRAINT"
-![](../pics/dimension-match-constraints.png)
-Fig. 8 - Dimension Constraints
+### <a href="#Dimension_constraints">尺寸约束</a>
+`ConstraintLayout`的最小尺寸
+你可以为 `ConstraintLayout` 指定最大和最小尺寸:
+ - `android:minWidth` 设置布局最小宽度
+ - `android:minHeight` 设置布局最小高度
+ - `android:maxWidth` 设置布局最大宽度
+ - `android:maxHeight` 设置布局最大高度
 
-The first two works in a similar fashion as other layouts. The last one will resize the widget in such a way as matching the constraints that are set (see Fig. 8, (a) is wrap_content, (b) is 0dp). If margins are set, they will be taken in account in the computation (Fig. 8, (c) with 0dp).
+这些最大和最小尺寸将在 `ConstraintLayout` 被设置为 `WRAP_CONTENT` 时生效。
 
-Important: MATCH_PARENT is not recommended for widgets contained in a ConstraintLayout. Similar behavior can be defined by using MATCH_CONSTRAINT with the corresponding left/right or top/bottom constraints being set to "parent".
 
-WRAP_CONTENT : enforcing constraints (Added in 1.1)
+##### 控件尺寸约束
+控件的尺寸可以有三种不同的方式去设置 `android:layout_width` 和 `android:layout_height` :
+ - 使用固定尺寸 (一个数值如 123dp 或者 尺寸引用)
+ - 使用 `WRAP_CONTENT`， 让每个控件计算自己的尺寸
+ - 使用 0dp，等同于 `MATCH_CONSTRAINT`
+![图8 - 尺寸约束](../pics/dimension-match-constraints.png)
+图8 - 尺寸约束
 
-If a dimension is set to WRAP_CONTENT, in versions before 1.1 they will be treated as a literal dimension -- meaning, constraints will not limit the resulting dimension. While in general this is enough (and faster), in some situations, you might want to use WRAP_CONTENT, yet keep enforcing constraints to limit the resulting dimension. In that case, you can add one of the corresponding attribute:
- - app:layout_constrainedWidth=”true|false”
- - app:layout_constrainedHeight=”true|false”
+前两个选项与其他布局一样使用。最后一个则是让控件适应布局的约束尺寸 (见图8， (a) 是 wrap_content，(b) 是 0dp)。如果设置了margin，则也会计算在内 (Fig. 8， (c) 是 0dp).
 
-MATCH_CONSTRAINT dimensions (Added in 1.1)
-When a dimension is set to MATCH_CONSTRAINT, the default behavior is to have the resulting size take all the available space. Several additional modifiers are available:
- - layout_constraintWidth_min and layout_constraintHeight_min : will set the minimum size for this dimension
- - layout_constraintWidth_max and layout_constraintHeight_max : will set the maximum size for this dimension
- - layout_constraintWidth_percent and layout_constraintHeight_percent : will set the size of this dimension as a percentage of the parent
+重要: `ConstraintLayout`的子控件不推荐使用`MATCH_PARENT`。使用 `MATCH_CONSTRAINT` 也可以达到与父控件上下左右对齐的效果。
 
-###### Min and Max
-The value indicated for min and max can be either a dimension in Dp, or "wrap", which will use the same value as what WRAP_CONTENT would do.
+WRAP_CONTENT : 强制约束 (版本1.1添加)
 
-##### Percent dimension
-To use percent, you need to set the following:
- - The dimension should be set to MATCH_CONSTRAINT (0dp)
- - The default should be set to percent app:layout_constraintWidth_default="percent" or app:layout_constraintHeight_default="percent" 
-(Note: this is necessary in 1.1-beta1 and 1.1-beta2, but will not be needed in following versions if the percent attribute is defined)
- - Then set the layout_constraintWidth_percent or layout_constraintHeight_percent attributes to a value between 0 and 1
+如果尺寸设置为 `WRAP_CONTENT`，在版本 1.1 之前 控件的尺寸将使用实际尺寸 -- 意思是， 约束并不会限制最终的尺寸。虽然一般来说这是足够的(快)，在某些情况下，您可能希望使用`WRAP_CONTENT`，然而保持强制约束限制的尺寸。在这种情况下，您可以添加一个相应的属性:
+ - `app:layout_constrainedWidth=”true|false”`
+ - `app:layout_constrainedHeight=”true|false”`
 
-##### Ratio
-You can also define one dimension of a widget as a ratio of the other one. In order to do that, you need to have at least one constrained dimension be set to 0dp (i.e., MATCH_CONSTRAINT), and set the attribute layout_constraintDimensionRatio to a given ratio. For example:
+`MATCH_CONSTRAINT` 尺寸 (版本1.1添加)
+当尺寸设置为 `MATCH_CONSTRAINT`， 默认行为是产生的大小采取一切可用的空间。几个额外的修饰符是可用的:
+ - `layout_constraintWidth_min` 和 `layout_constraintHeight_min` : 设置最小尺寸
+ - `layout_constraintWidth_max` 和 `layout_constraintHeight_max` : 设置最大尺寸
+ - `layout_constraintWidth_percent` 和 `layout_constraintHeight_percent` : 按父控件的百分比设置尺寸
+
+###### 最小 and 最大
+最小和最大尺寸可以使用dp值指定，或者 "wrap"(与`WRAP_CONTENT`效果类似)。
+
+##### 百分比尺寸
+如果要使用百分比布局，你需要使用下面的设置：
+ - 尺寸设置为 `MATCH_CONSTRAINT` (0dp)
+ - 默认应该设置为百分比 `app:layout_constraintWidth_default="percent"` or `app:layout_constraintHeight_default="percent"`
+(注意: 在版本 1.1-beta1 and 1.1-beta2 是必须的， 但在后续的版本中定义了百分比属性后则是不需要的)
+ - 然后设置 `layout_constraintWidth_percent` 或 `layout_constraintHeight_percent` 属性，范围为： 0 到 1
+
+##### 比例
+你也可以使用一个控件的尺寸的比例设置另一个尺寸。为了做到这一点，你需要至少有一个有约束寸尺被设置为0dp(即`MATCH_CONSTRAINT`)，并设置属性`layout_constraintDimensionRatio`指定比例。例如:
 ```xml
 <Button android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1:1" />
 ```
-     
-will set the height of the button to be the same as its width.
-The ratio can be expressed either as:
- - a float value, representing a ratio between width and height
- - a ratio in the form "width:height"
 
-You can also use ratio if both dimensions are set to MATCH_CONSTRAINT (0dp). In this case the system sets the largest dimensions the satisfies all constraints and maintains the aspect ratio specified. To constrain one specific side based on the dimensions of another, you can pre append W," or H, to constrain the width or height respectively. For example, If one dimension is constrained by two targets (e.g. width is 0dp and centered on parent) you can indicate which side should be constrained, by adding the letter W (for constraining the width) or H (for constraining the height) in front of the ratio, separated by a comma:
+将按钮的高度设置为与宽度的比例为1:1。
+
+这个比例可以表达为:
+ - 一个 float 值，代表宽度和高度之间的比例
+ - 一个比值 "width:height"
+
+如果两个尺寸都设置为`MATCH_CONSTRAINT`(0 dp)，你也是可以使用比例。在这种情况下，在满足所有约束和维护指定的长宽比的前提下，系统会设置一个最大的尺寸。根据另一个维度约束一个特定的边，你可以附加W或H，分别限制宽度或高度。举个例子，如果一个维度由两个属性约束(如宽度为0dp并且在父布局居中)可以指明哪一个属性应该约束，通过添加字母W(对于限制宽度)或H(限制高度)的比率，用逗号分开:
 ```xml
 <Button android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,16:9"
+        app:layout_constraintDimensionRatio="H，16:9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 ```
-     
-will set the height of the button following a 16:9 ratio, while the width of the button will match the constraints to parent.
 
-#### Chains
-Chains provide group-like behavior in a single axis (horizontally or vertically). The other axis can be constrained independently.
+将按钮的高度设置后一个16:9的高度，而按钮的宽度将匹配父容器的约束。
 
-##### Creating a chain
-A set of widgets are considered a chain if they are linked together via a bi-directional connection (see Fig. 9, showing a minimal chain, with two widgets).
+
+### <a href="#Chains">链</a>
+`Chains` 提供类似组(group-like)的行为在一个轴(axis)(横向或纵向)。其他轴可以独立约束。
+
+##### 创建一个链
+一组控件通过双向链连接在一起，则他们被认为是一个链(参见图9，显示两个控件组成的最小链，)。
 
 ![](../pics/chains.png)
-Fig. 9 - Chain
+图9 - Chain
 
-##### Chain heads
-Chains are controlled by attributes set on the first element of the chain (the "head" of the chain):
-
+##### 链首（Chain Head）
+链是由链集合的第一个元素(链首)的属性控制:
 ![](../pics/chains-head.png)
-Fig. 10 - Chain Head
-The head is the left-most widget for horizontal chains, and the top-most widget for vertical chains.
+图 10 - Chain Head
+左边第一个的控件是水平链的链首，最顶部的控件是垂直链的链首。
 
 ##### Margins in chains
-If margins are specified on connections, they will be taken in account. In the case of spread chains, margins will be deducted from the allocated space.
+如果margin上指定的连接，它们将被考虑在内。在展开链的情况下，margin将被去除分配的空间。
 
-##### Chain Style
-When setting the attribute layout_constraintHorizontal_chainStyle or layout_constraintVertical_chainStyle on the first element of a chain, the behavior of the chain will change according to the specified style (default is CHAIN_SPREAD).
+##### 链的样式
+当给链头设置属性 `layout_constraintHorizontal_chainStyle` 或 `layout_constraintVertical_chainStyle` 时，链的行为会改变根据指定的样式(缺省为`CHAIN_SPREAD`)。.
 
- - CHAIN_SPREAD -- the elements will be spread out (default style)
- - Weighted chain -- in CHAIN_SPREAD mode, if some widgets are set to MATCH_CONSTRAINT, they will split the available space
- - CHAIN_SPREAD_INSIDE -- similar, but the endpoints of the chain will not be spread out
- - CHAIN_PACKED -- the elements of the chain will be packed together. The horizontal or vertical bias attribute of the child will then affect the positioning of the packed elements
+ - `CHAIN_SPREAD` -- 元素将均匀分散 (默认样式)
+ - `CHAIN_SPREAD`模式的权重链（Weighted chain），如果有控件设置为 `MATCH_CONSTRAINT`，它们将分割可用空间
+ - `CHAIN_SPREAD_INSIDE` -- 类似，但链式的端点不会散开
+ - `CHAIN_PACKED` -- 链的元素将被打包在一起。孩子的水平或垂直偏差属性将影响包装元素的位置
 
 ![](../pics/chains-styles.png)
-Fig. 11 - Chains Styles
+图11 - Chains Styles
 
 
-##### Weighted chains
-The default behavior of a chain is to spread the elements equally in the available space. If one or more elements are using MATCH_CONSTRAINT, they will use the available empty space (equally divided among themselves). The attribute layout_constraintHorizontal_weight and layout_constraintVertical_weight will control how the space will be distributed among the elements using MATCH_CONSTRAINT. For exemple, on a chain containing two elements using MATCH_CONSTRAINT, with the first element using a weight of 2 and the second a weight of 1, the space occupied by the first element will be twice that of the second element.
+##### 权重链
+链的默认行为是让元素均匀分布在可用空间。如果一个或多个元素使用`MATCH_CONSTRAINT`，他们将利用可用空间(他们之间平分)。属性`layout_constraintHorizontal_weight`和 `layout_constraintVertical_weight`将控制如何把 使用了`MATCH_CONSTRAINT`的元素 分布在空间。例如，链中包含两个使用了`MATCH_CONSTRAINT`的元素，第一个元素使用的权重为2，第二个元素的权重为1，第一个元素占用的空间将是第二个元素的两倍。
 
-##### Margins and chains (in 1.1)
-When using margins on elements in a chain, the margins are additive.
+##### Margins and 链 (in 1.1)
+当链中的元素使用margin时，margin是附加的。
 
-For example, on a horizontal chain, if one element defines a right margin of 10dp and the next element defines a left margin of 5dp, the resulting margin between those two elements is 15dp.
+例如，在一个水平链中，如果一个元素定义右边距为 10dp， 接下来的元素定义左边距为 5dp，则这两个元素的间距就是15dp.
 
-An item plus its margins are considered together when calculating leftover space used by chains to position items. The leftover space does not contain the margins.
+在计算剩余空间时，元素的尺寸和margin被打包在一起计算的。剩下的空间不包含元素间的间距。
 
-#### Virtual Helper objects
-In addition to the intrinsic capabilities detailed previously, you can also use special helper objects in ConstraintLayout to help you with your layout. Currently, the Guideline object allows you to create Horizontal and Vertical guidelines which are positioned relative to the ConstraintLayout container. Widgets can then be positioned by constraining them to such guidelines. In 1.1, Barrier and Group were added too.
 
-#### Optimizer (in 1.1)
-In 1.1 we exposed the constraints optimizer. You can decide which optimizations are applied by adding the tag app:layout_optimizationLevel to the ConstraintLayout element.
+### <a href="#Virtual_Helpers_objects">虚拟助手对象</a>
+除了刚才详细描述的原有功能，你还可以在`ConstraintLayout`中使用特殊的helper对象来帮助你布局。目前，`Guideline`对象允许您创建水平和垂直参考线来摆放在于`ConstraintLayout`容器的相对位置。控件在布局定位时可以使用guidelines来约束。在1.1中，`Barrier`和`Group`被添加。
 
- - none : no optimizations are applied
- - standard : Default. Optimize direct and barrier constraints only
- - direct : optimize direct constraints
- - barrier : optimize barrier constraints
- - chain : optimize chain constraints (experimental)
- - dimensions : optimize dimensions measures (experimental),  reducing the number of measures of match constraints elements
 
-This attribute is a mask, so you can decide to turn on or off specific optimizations by listing the ones you want. For example: app:layout_optimizationLevel="direct|barrier|chain"
+### <a href="#Optimizer">优化器</a> (in 1.1)
+在1.1中我们接触约束优化器。你可以通过添加标签`layout_optimizationLevel`，来指定优化哪些`ConstraintLayout`元素:
+ - `none` : 不使用优化器
+ - `standard` : 默认. 只优化direct 和 barrier
+ - `direct` : 只优化direct约束
+ - `barrier` : 只优化barrier约束
+ - `chain` : 优化链约束 (试验功能)
+ - `dimensions` : 优化尺寸约束 (试验)， 减少匹配到的元素的测量次数
+
+这个属性是一个掩码(mask)，所以你可以通过列表决定打开或关闭你想要的优化。 例如: `app:layout_optimizationLevel="direct|barrier|chain"`
+
+
+------------------
+[ConstraintLayout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout)
+[Android新特性介绍，ConstraintLayout完全解析](https://blog.csdn.net/guolin_blog/article/details/53122387)
+
+
