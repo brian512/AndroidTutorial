@@ -16,6 +16,8 @@
  - [RelativeLayout](./md/Junior/RelativeLayout.md)
  - [ConstraintLayout](./md/Junior/ConstraintLayout.md)
 
+ - [Android中各种Span的用法](./md/Junior/SpannableString.md)
+
  - [IntentService解析](./md/Junior/IntentService.md)
  - [系统通知](./md/Junior/Notifications.md)
 
