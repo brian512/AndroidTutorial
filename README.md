@@ -20,6 +20,7 @@
 
  - [IntentService解析](./md/Junior/IntentService.md)
  - [系统通知](./md/Junior/Notifications.md)
+ - [使用FileProvider安全地共享文件](./md/Junior/FileProvider.md)
 
 ### Android进阶
 
